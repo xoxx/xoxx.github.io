@@ -94,19 +94,15 @@ body{
   background:transparent;
   color:var(--toggle-color);
   border:var(--toggle-border);
-  font-size:20px;
+  font-size:22px;
   cursor:pointer;
   display:flex;
   align-items:center;
   justify-content:center;
+  line-height:1;    /* 核心：消除文字默认行高上下空白 */
+  padding:0;        /* 清空内边距 */
   z-index:99;
   outline:none;
-}
-.mode-toggle:hover{
-  border-color:var(--main-blue);
-}
-.mode-toggle:active{
-  transform:scale(.95);
 }
 /* 键盘聚焦样式，无障碍优化 */
 .mode-toggle:focus-visible{
@@ -304,18 +300,18 @@ p.desc{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;        /* 缩小间距减少宽度 */
-  flex-wrap: wrap;      /* 空间不足自动换行 */
+  gap: 0.5rem;
+  flex-wrap: wrap;
   line-height: 1.4;
 }
 .footer-links a {
   display: inline-flex;
-  align-items: center; /* SVG图标与文字垂直居中，防止高低错位 */
-  gap: 3px;
+  align-items: center;
+  gap: 4px;
   color: var(--text-desc);
   text-decoration: none;
   transition: opacity 0.2s;
-  white-space: nowrap; /* 单个链接内部文字禁止换行，杜绝文字截断 */
+  white-space: nowrap;
 }
 .footer-links a:hover {
   opacity: 0.7;
@@ -323,9 +319,22 @@ p.desc{
 }
 .footer-links .sep {
   color: var(--text-secondary);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   line-height: 1;
 }
+
+/* 删除缩小图标这段媒体查询，彻底取消压缩 */
+/*
+@media (max-width: 420px) {
+  .footer-links {
+    gap: 0.2rem;
+  }
+  .footer-links svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+}
+*/
 
 /* 超小屏手机进一步压缩尺寸 */
 @media (max-width: 420px) {
