@@ -8,34 +8,34 @@
 <meta name="robots" content="none">
 <title>怸歪小站-欢迎页</title>
 <script>
-// 页面加载前优先设置主题，防止闪烁
+// 页面加载前优先设置主题，防止FOUC闪烁
 const savedTheme = localStorage.getItem("theme");
-// 获取系统深色模式配置
+// 读取系统深色模式配置
 const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-// 优先级：本地存储 > 系统默认
+// 优先级：本地存储 > 系统默认设置
 const initTheme = savedTheme || (systemDark ? "dark" : "light");
 document.documentElement.setAttribute("data-theme", initTheme);
 </script>
 <style>
-/* ========== 全局变量定义（浅色/深色共用变量） ========== */
+/* ========== 全局CSS变量（深浅两套主题共用） ========== */
 :root {
-  --bg-color:#fefefe;                /* 页面背景色-浅色 */
-  --text-primary:#333;               /* 主文字颜色 */
-  --text-secondary:#666;             /* 次要文字 */
-  --text-desc:#777;                  /* 描述文字、页脚文字 */
-  --btn-bg:transparent;              /* 按钮背景透明 */
+  --bg-color:#fefefe;                /* 浅色背景 */
+  --text-primary:#333;               /* 一级主文字 */
+  --text-secondary:#666;             /* 二级文字 */
+  --text-desc:#777;                  /* 页脚描述文字 */
+  --btn-bg:transparent;              /* 按钮透明背景 */
   --btn-color:#555;                  /* 按钮文字颜色 */
-  --btn-border:1px solid #999;      /* 按钮边框 */
+  --btn-border:1px solid #999;       /* 按钮边框 */
   --btn-radius:4px;                  /* 按钮圆角 */
-  --toggle-color:#555;               /* 切换按钮颜色 */
+  --toggle-color:#555;               /* 切换按钮文字色 */
   --toggle-border:1px solid #999;    /* 切换按钮边框 */
-  --pinyin-color:#888;               /* 拼音文字颜色 */
-  --main-blue:#409eff;               /* 主题蓝色（hover高亮） */
+  --pinyin-color:#888;               /* 标题拼音颜色 */
+  --main-blue:#409eff;               /* hover高亮主题蓝 */
   --btn-w:220px;                     /* 按钮宽度 */
   --btn-h:56px;                      /* 按钮高度 */
-  --btn-gap:12px;                    /* 按钮之间间距 */
+  --btn-gap:12px;                    /* 按钮横向间距 */
 }
-/* 深色模式变量覆盖 */
+/* 深色主题变量覆盖 */
 [data-theme="dark"] {
   --bg-color:#121212;
   --text-primary:#f0f0f0;
@@ -56,24 +56,24 @@ document.documentElement.setAttribute("data-theme", initTheme);
   box-sizing:border-box;
   font-weight:500;
   text-decoration:none;
-  /* 统一过渡动画，切换主题更顺滑 */
+  /* 主题切换动画统一过渡 */
   transition:color .3s ease,background-color .3s ease,border-color .3s ease;
 }
 
-/* 页面主体布局：垂直弹性布局，内容垂直居中 */
+/* 页面整体弹性布局，内容垂直居中 */
 body{
   min-height:100vh;
   display:flex;
   flex-direction:column;
   background-color:var(--bg-color);
-  /* 多字体兼容，优先苹方、微软雅黑 */
+  /* 多字体降级兼容 */
   font-family:"lucida grande","lucida sans unicode",lucida,helvetica,"PingFang SC","Hiragino Sans GB","STHeiti Light","Microsoft YaHei","WenQuanYi Micro Hei";
   position:relative;
   padding:20px;
   line-height:1.4;
 }
 
-/* 中间主体内容区域，自动占满剩余高度 */
+/* 主体内容容器，自动填满屏幕垂直空间 */
 .main-content{
   flex:1;
   display:flex;
@@ -83,7 +83,7 @@ body{
   text-align:center;
 }
 
-/* 明暗切换悬浮按钮 */
+/* 明暗切换悬浮圆形按钮 */
 .mode-toggle{
   position:fixed;
   top:20px;
@@ -99,12 +99,12 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  line-height:1;    /* 核心：消除文字默认行高上下空白 */
+  line-height:1;    /* 压缩文字上下行高，减少留白 */
   padding:0;        /* 清空内边距 */
   z-index:99;
   outline:none;
 }
-/* 键盘聚焦样式，无障碍优化 */
+/* 键盘Tab聚焦外框，无障碍优化 */
 .mode-toggle:focus-visible{
   box-shadow:0 0 0 2px rgba(64,158,255,.5);
 }
@@ -117,7 +117,7 @@ h1{
   color:var(--text-primary);
   font-weight:900;
 }
-/* 汉字拼音注释排版 */
+/* 汉字拼音ruby标签排版 */
 h1 ruby{
   text-align:center;
 }
@@ -146,7 +146,7 @@ p.desc{
   margin-bottom:16px;
 }
 
-/* 按钮网格容器：两列自适应 */
+/* 按钮网格容器，自动两列布局 */
 .btn-wrap{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(var(--btn-w), 1fr));
@@ -185,7 +185,7 @@ p.desc{
   transform:translateY(-2px);
   box-shadow:0 4px 15px rgba(64,158,255,.2);
 }
-/* 深色模式阴影加深 */
+/* 深色模式加深阴影 */
 [data-theme="dark"] .btn-wrap a:hover{
   box-shadow:0 4px 15px rgba(64,158,255,.4);
 }
@@ -196,7 +196,7 @@ p.desc{
   box-shadow:0 0 0 2px rgba(64,158,255,.5);
 }
 
-/* 手机端按钮改为单列 */
+/* 手机端自动变为单列按钮 */
 @media (max-width:520px){
   .btn-wrap{
     grid-template-columns:1fr;
@@ -204,7 +204,7 @@ p.desc{
   }
 }
 
-/* 自定义HTML预留区域，容器彻底不占用高度 */
+/* 预留自定义HTML区域，不占用页面高度 */
 .custom-html-area {
   display: contents !important;
 }
@@ -236,7 +236,7 @@ p.desc{
   color:var(--main-blue);
 }
 
-/* 底部版权行 */
+/* 底部版权文字行 */
 .footer-copyright{
   width:100%;
   text-align:center;
@@ -277,7 +277,7 @@ p.desc{
   color: var(--text-desc);
   line-height:1.3;
 }
-/* ICP链接常态与正文同色，hover再高亮 */
+/* ICP链接继承文字颜色，不自动变蓝 */
 .custom-footer-text a {
   color: inherit;
   text-decoration: underline;
@@ -287,7 +287,7 @@ p.desc{
   color: var(--main-blue);
 }
 
-/* 运行时间文字 */
+/* 网站运行时长文字 */
 #site-time {
   font-size: 0.85em;
   color: var(--text-desc);
@@ -295,23 +295,23 @@ p.desc{
   line-height:1.3;
 }
 
-/* ========== 核心修复：底部链接防换行错位 ========== */
+/* ========== 页脚图标链接【已放大尺寸+加宽间距，解决图标偏小不协调】 ========== */
 .footer-links {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.65rem;        /* 加大整体横向间距，不再拥挤 */
   flex-wrap: wrap;
-  line-height: 1.4;
+  line-height: 1.6;
 }
 .footer-links a {
   display: inline-flex;
-  align-items: center;
-  gap: 4px;
+  align-items: center; /* SVG图标与文字垂直居中，防止高低错位 */
+  gap: 6px;            /* 图标和文字之间留白加宽 */
   color: var(--text-desc);
   text-decoration: none;
   transition: opacity 0.2s;
-  white-space: nowrap;
+  white-space: nowrap; /* 禁止链接内部文字换行 */
 }
 .footer-links a:hover {
   opacity: 0.7;
@@ -319,35 +319,11 @@ p.desc{
 }
 .footer-links .sep {
   color: var(--text-secondary);
-  font-size: 0.75rem;
+  font-size: 0.85rem;   /* 分隔符字号放大，匹配整体比例 */
   line-height: 1;
 }
 
-/* 删除缩小图标这段媒体查询，彻底取消压缩 */
-/*
-@media (max-width: 420px) {
-  .footer-links {
-    gap: 0.2rem;
-  }
-  .footer-links svg {
-    width: 11px !important;
-    height: 11px !important;
-  }
-}
-*/
-
-/* 超小屏手机进一步压缩尺寸 */
-@media (max-width: 420px) {
-  .footer-links {
-    gap: 0.2rem;
-  }
-  .footer-links svg {
-    width: 11px !important;
-    height: 11px !important;
-  }
-}
-
-/* 双色调徽章样式（YouTube/资助按钮） */
+/* 双色调徽章（YouTube、资助按钮）样式 */
 .badge-dual {
   display: inline-flex;
   align-items: center;
@@ -407,7 +383,7 @@ p.desc{
   visibility: visible;
   pointer-events: auto;
 }
-/* 弹窗小三角箭头 */
+/* 弹窗尖角箭头 */
 .rss-popup::after {
   content: "";
   position: absolute;
@@ -523,22 +499,22 @@ p.desc{
             </a>
         </div>
 
-		<!-- GitHub、B站、邮箱链接 -->
+		<!-- GitHub、B站、邮箱链接【SVG图标已放大至18×18，匹配文字比例】 -->
 		<p class="custom-footer-text footer-links">
 			<a href="https://github.com/oxn/" target="_blank" rel="noopener noreferrer" title="GitHub">
-				<svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
+				<svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
 					<path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
 				</svg>
 			</a>
 			<span class="sep">|</span>
 			<a href="https://space.bilibili.com/3707012544202886" target="_blank" rel="noopener noreferrer" title="Bilibili">
-				<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 					<path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z"></path>
 				</svg>
 			</a>
 			<span class="sep">|</span>
 			<a href="mailto:aszx@qq.com" title="发送邮件">
-				<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<rect x="2" y="4" width="20" height="16" rx="2"></rect>
 					<path d="M22 4L12 13 2 4"></path>
 				</svg>
@@ -552,7 +528,7 @@ p.desc{
 		<!-- 网站运行时长 -->
 		<p id="site-time">本站已苦苦支撑很久了！</p>
 
-		<!-- CDN与服务商链接行（已修复移动端串行问题） -->
+		<!-- CDN与服务商链接行 -->
 		<p class="custom-footer-text footer-links">
 			<span>Protected by</span>
 			<a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" title="Cloudflare">
