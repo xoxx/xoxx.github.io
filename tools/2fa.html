@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>TOTP / 2FA 验证码生成器</title>
 <style>
 *{
@@ -45,6 +45,8 @@ h2{
   font-weight:600;
   font-size:24px;
 }
+
+/* ========== 默认布局：电脑、平板、手机横屏（原版一行4栏） ========== */
 .row-four{
   display:flex;
   gap:12px;
@@ -55,6 +57,7 @@ h2{
 .col-digits{flex:1;}
 .col-period{flex:1;}
 .col-offset{flex:1;}
+
 .input-item{
   width:100%;
 }
@@ -138,6 +141,64 @@ input,select{
   font-size:14px;
   opacity:0.65;
   line-height:1.6;
+}
+
+/* ========== 仅手机竖屏才启用新布局：宽度≤767px + 竖屏 ========== */
+@media screen and (max-width:767px) and (orientation:portrait){
+  body{
+    padding:15px;
+  }
+  .box{
+    padding:24px 20px;
+  }
+  h2{
+    font-size:22px;
+    margin-bottom:24px;
+  }
+  /* 四参数改为2×2网格 */
+  .row-four{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .col-algo,.col-digits,.col-period,.col-offset{
+    flex:none;
+  }
+  label{
+    font-size:14px;
+    margin-bottom:6px;
+  }
+  input,select{
+    padding:12px 14px;
+    font-size:16px;
+  }
+  /* 密钥行改为上下堆叠 */
+  .secret-row{
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+    margin-bottom:26px;
+  }
+  /* 验证码+按钮上下排列 */
+  .code-row{
+    flex-direction:column;
+    gap:12px;
+  }
+  .code-current{
+    font-size:clamp(36px,12vw,52px);
+    letter-spacing:4px;
+  }
+  .btn{
+    width:100%;
+  }
+  .next-txt{
+    font-size:clamp(18px,5vw,22px);
+    margin-bottom:24px;
+  }
+  .tip{
+    font-size:13px;
+  }
 }
 </style>
 </head>
