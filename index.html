@@ -323,59 +323,17 @@ p.desc{
   line-height: 1;
 }
 
-/* 删除缩小图标这段媒体查询，彻底取消压缩 */
-/*
-@media (max-width: 420px) {
-  .footer-links {
-    gap: 0.2rem;
-  }
-  .footer-links svg {
-    width: 11px !important;
-    height: 11px !important;
-  }
-}
-*/
-
-
-
-/* 双色调徽章样式（YouTube/资助按钮） */
-.badge-dual {
-  display: inline-flex;
-  align-items: center;
-  font-size: 11px;
-  font-weight: 600;
-  font-family: system-ui, -apple-system, sans-serif;
-  border-radius: 6px;
-  overflow: hidden;
-  height: 22px;
-  vertical-align: middle;
-  margin: 4px 6px;
-  user-select: none;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
-    0 2px 6px rgba(0, 0, 0, 0.32);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.badge-dual:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.28),
-    0 3px 9px rgba(0, 0, 0, 0.4);
-}
-.badge-left-part, .badge-right-part {
-  color: #ffffff;
-  padding: 0 10px;
-  line-height: 22px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-}
+/* 徽章行居中 */
 .badge-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.5rem;
+  margin: 6px 0;
+}
+.badge-row a {
+  line-height: 0;
 }
 
 /* 弹窗悬浮层样式 */
@@ -498,19 +456,65 @@ p.desc{
 	<div class="custom-footer-content">
 		<p class="custom-footer-text"> 已经到底了哦~ </p>
 
-        <!-- 双色块按钮行 -->
+        <!-- 双色SVG徽章行（已替换完成，固定宽度不会全屏拉伸） -->
         <div class="badge-row">
             <a href="https://www.youtube.com/@%E6%80%B8%E6%AD%AA" target="_blank" rel="noopener noreferrer nofollow">
-                <span class="badge-dual">
-                    <span class="badge-left-part" style="background: linear-gradient(135deg, #454545 0%, #333 100%);">YouTube</span>
-                    <span class="badge-right-part" style="background: linear-gradient(135deg, #cb0a0a 0%, #9b0707 100%);">油管</span>
-                </span>
+<svg xmlns="http://www.w3.org/2000/svg" width="90" height="20" role="img" aria-label="YouTube: 油管">
+<title>YouTube: 油管</title>
+<filter id="blur"><feGaussianBlur stdDeviation="16"/></filter>
+<linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient>
+<clipPath id="r"><rect width="90" height="20" rx="3"/></clipPath>
+<g clip-path="url(#r)">
+<rect width="57" height="20" fill="#555"/>
+<rect x="57" width="33" height="20" fill="#c32136"/>
+<rect width="90" height="20" fill="url(#s)"/>
+</g>
+<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110">
+<g transform="scale(.1)">
+<g aria-hidden="true" fill="#010101">
+<text x="295" y="150" fill-opacity=".8" filter="url(#blur)">YouTube</text>
+<text x="295" y="150" fill-opacity=".3">YouTube</text>
+</g>
+<text x="295" y="140">YouTube</text>
+</g>
+<g transform="scale(.1)">
+<g aria-hidden="true" fill="#010101">
+<text x="725" y="150" fill-opacity=".8" filter="url(#blur)">油管</text>
+<text x="725" y="150" fill-opacity=".3">油管</text>
+</g>
+<text x="725" y="140">油管</text>
+</g>
+</g>
+</svg>
             </a>
             <a href="https://776789.xyz/zz" target="_blank" rel="noopener noreferrer nofollow">
-                <span class="badge-dual">
-                    <span class="badge-left-part" style="background: linear-gradient(135deg, #454545 0%, #333 100%);">$$$</span>
-                    <span class="badge-right-part" style="background: linear-gradient(135deg, #07c160 0%, #06a050 100%);">资助</span>
-                </span>
+<svg xmlns="http://www.w3.org/2000/svg" width="90" height="20" role="img" aria-label="$$$: 资助">
+<title>$$$: 资助</title>
+<filter id="blur"><feGaussianBlur stdDeviation="16"/></filter>
+<linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient>
+<clipPath id="r"><rect width="90" height="20" rx="3"/></clipPath>
+<g clip-path="url(#r)">
+<rect width="57" height="20" fill="#555"/>
+<rect x="57" width="33" height="20" fill="#07c160"/>
+<rect width="90" height="20" fill="url(#s)"/>
+</g>
+<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110">
+<g transform="scale(.1)">
+<g aria-hidden="true" fill="#010101">
+<text x="295" y="150" fill-opacity=".8" filter="url(#blur)">$$$</text>
+<text x="295" y="150" fill-opacity=".3">$$$</text>
+</g>
+<text x="295" y="140">$$$</text>
+</g>
+<g transform="scale(.1)">
+<g aria-hidden="true" fill="#010101">
+<text x="725" y="150" fill-opacity=".8" filter="url(#blur)">资助</text>
+<text x="725" y="150" fill-opacity=".3">资助</text>
+</g>
+<text x="725" y="140">资助</text>
+</g>
+</g>
+</svg>
             </a>
         </div>
 
