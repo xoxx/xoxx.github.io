@@ -8,34 +8,34 @@
 <meta name="robots" content="none">
 <title>怸歪小站-欢迎页</title>
 <script>
-// 页面加载前优先设置主题，防止FOUC闪烁
+// 页面加载前优先设置主题，防止闪烁
 const savedTheme = localStorage.getItem("theme");
-// 读取系统深色模式配置
+// 获取系统深色模式配置
 const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-// 优先级：本地存储 > 系统默认设置
+// 优先级：本地存储 > 系统默认
 const initTheme = savedTheme || (systemDark ? "dark" : "light");
 document.documentElement.setAttribute("data-theme", initTheme);
 </script>
 <style>
-/* ========== 全局CSS变量（深浅两套主题共用） ========== */
+/* ========== 全局变量定义（浅色/深色共用变量） ========== */
 :root {
-  --bg-color:#fefefe;                /* 浅色背景 */
-  --text-primary:#333;               /* 一级主文字 */
-  --text-secondary:#666;             /* 二级文字 */
-  --text-desc:#777;                  /* 页脚描述文字 */
-  --btn-bg:transparent;              /* 按钮透明背景 */
+  --bg-color:#fefefe;                /* 页面背景色-浅色 */
+  --text-primary:#333;               /* 主文字颜色 */
+  --text-secondary:#666;             /* 次要文字 */
+  --text-desc:#777;                  /* 描述文字、页脚文字 */
+  --btn-bg:transparent;              /* 按钮背景透明 */
   --btn-color:#555;                  /* 按钮文字颜色 */
-  --btn-border:1px solid #999;       /* 按钮边框 */
+  --btn-border:1px solid #999;      /* 按钮边框 */
   --btn-radius:4px;                  /* 按钮圆角 */
-  --toggle-color:#555;               /* 切换按钮文字色 */
+  --toggle-color:#555;               /* 切换按钮颜色 */
   --toggle-border:1px solid #999;    /* 切换按钮边框 */
-  --pinyin-color:#888;               /* 标题拼音颜色 */
-  --main-blue:#409eff;               /* hover高亮主题蓝 */
+  --pinyin-color:#888;               /* 拼音文字颜色 */
+  --main-blue:#409eff;               /* 主题蓝色（hover高亮） */
   --btn-w:220px;                     /* 按钮宽度 */
   --btn-h:56px;                      /* 按钮高度 */
-  --btn-gap:12px;                    /* 按钮横向间距 */
+  --btn-gap:12px;                    /* 按钮之间间距 */
 }
-/* 深色主题变量覆盖 */
+/* 深色模式变量覆盖 */
 [data-theme="dark"] {
   --bg-color:#121212;
   --text-primary:#f0f0f0;
@@ -56,24 +56,24 @@ document.documentElement.setAttribute("data-theme", initTheme);
   box-sizing:border-box;
   font-weight:500;
   text-decoration:none;
-  /* 主题切换动画统一过渡 */
+  /* 统一过渡动画，切换主题更顺滑 */
   transition:color .3s ease,background-color .3s ease,border-color .3s ease;
 }
 
-/* 页面整体弹性布局，内容垂直居中 */
+/* 页面主体布局：垂直弹性布局，内容垂直居中 */
 body{
   min-height:100vh;
   display:flex;
   flex-direction:column;
   background-color:var(--bg-color);
-  /* 多字体降级兼容 */
+  /* 多字体兼容，优先苹方、微软雅黑 */
   font-family:"lucida grande","lucida sans unicode",lucida,helvetica,"PingFang SC","Hiragino Sans GB","STHeiti Light","Microsoft YaHei","WenQuanYi Micro Hei";
   position:relative;
   padding:20px;
   line-height:1.4;
 }
 
-/* 主体内容容器，自动填满屏幕垂直空间 */
+/* 中间主体内容区域，自动占满剩余高度 */
 .main-content{
   flex:1;
   display:flex;
@@ -83,7 +83,7 @@ body{
   text-align:center;
 }
 
-/* 明暗切换悬浮圆形按钮 */
+/* 明暗切换悬浮按钮 */
 .mode-toggle{
   position:fixed;
   top:20px;
@@ -99,12 +99,12 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  line-height:1;    /* 压缩文字上下行高，减少留白 */
+  line-height:1;    /* 核心：消除文字默认行高上下空白 */
   padding:0;        /* 清空内边距 */
   z-index:99;
   outline:none;
 }
-/* 键盘Tab聚焦外框，无障碍优化 */
+/* 键盘聚焦样式，无障碍优化 */
 .mode-toggle:focus-visible{
   box-shadow:0 0 0 2px rgba(64,158,255,.5);
 }
@@ -117,7 +117,7 @@ h1{
   color:var(--text-primary);
   font-weight:900;
 }
-/* 汉字拼音ruby标签排版 */
+/* 汉字拼音注释排版 */
 h1 ruby{
   text-align:center;
 }
@@ -146,7 +146,7 @@ p.desc{
   margin-bottom:16px;
 }
 
-/* 按钮网格容器，自动两列布局 */
+/* 按钮网格容器：两列自适应 */
 .btn-wrap{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(var(--btn-w), 1fr));
@@ -185,7 +185,7 @@ p.desc{
   transform:translateY(-2px);
   box-shadow:0 4px 15px rgba(64,158,255,.2);
 }
-/* 深色模式加深阴影 */
+/* 深色模式阴影加深 */
 [data-theme="dark"] .btn-wrap a:hover{
   box-shadow:0 4px 15px rgba(64,158,255,.4);
 }
@@ -196,7 +196,7 @@ p.desc{
   box-shadow:0 0 0 2px rgba(64,158,255,.5);
 }
 
-/* 手机端自动变为单列按钮 */
+/* 手机端按钮改为单列 */
 @media (max-width:520px){
   .btn-wrap{
     grid-template-columns:1fr;
@@ -204,7 +204,7 @@ p.desc{
   }
 }
 
-/* 预留自定义HTML区域，不占用页面高度 */
+/* 自定义HTML预留区域，容器彻底不占用高度 */
 .custom-html-area {
   display: contents !important;
 }
@@ -236,7 +236,7 @@ p.desc{
   color:var(--main-blue);
 }
 
-/* 底部版权文字行 */
+/* 底部版权行 */
 .footer-copyright{
   width:100%;
   text-align:center;
@@ -277,7 +277,7 @@ p.desc{
   color: var(--text-desc);
   line-height:1.3;
 }
-/* ICP链接继承文字颜色，不自动变蓝 */
+/* ICP链接常态与正文同色，hover再高亮 */
 .custom-footer-text a {
   color: inherit;
   text-decoration: underline;
@@ -287,7 +287,7 @@ p.desc{
   color: var(--main-blue);
 }
 
-/* 网站运行时长文字 */
+/* 运行时间文字 */
 #site-time {
   font-size: 0.85em;
   color: var(--text-desc);
@@ -295,23 +295,23 @@ p.desc{
   line-height:1.3;
 }
 
-/* ========== 页脚图标链接【已放大尺寸+加宽间距，解决图标偏小不协调】 ========== */
+/* ========== 核心修复：底部链接防换行错位 ========== */
 .footer-links {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.65rem;        /* 加大整体横向间距，不再拥挤 */
+  gap: 0.5rem;
   flex-wrap: wrap;
-  line-height: 1.6;
+  line-height: 1.4;
 }
 .footer-links a {
   display: inline-flex;
-  align-items: center; /* SVG图标与文字垂直居中，防止高低错位 */
-  gap: 6px;            /* 图标和文字之间留白加宽 */
+  align-items: center;
+  gap: 4px;
   color: var(--text-desc);
   text-decoration: none;
   transition: opacity 0.2s;
-  white-space: nowrap; /* 禁止链接内部文字换行 */
+  white-space: nowrap;
 }
 .footer-links a:hover {
   opacity: 0.7;
@@ -319,11 +319,35 @@ p.desc{
 }
 .footer-links .sep {
   color: var(--text-secondary);
-  font-size: 0.85rem;   /* 分隔符字号放大，匹配整体比例 */
+  font-size: 0.75rem;
   line-height: 1;
 }
 
-/* 双色调徽章（YouTube、资助按钮）样式 */
+/* 删除缩小图标这段媒体查询，彻底取消压缩 */
+/*
+@media (max-width: 420px) {
+  .footer-links {
+    gap: 0.2rem;
+  }
+  .footer-links svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+}
+*/
+
+/* 超小屏手机进一步压缩尺寸 */
+@media (max-width: 420px) {
+  .footer-links {
+    gap: 0.2rem;
+  }
+  .footer-links svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+}
+
+/* 双色调徽章样式（YouTube/资助按钮） */
 .badge-dual {
   display: inline-flex;
   align-items: center;
@@ -383,7 +407,7 @@ p.desc{
   visibility: visible;
   pointer-events: auto;
 }
-/* 弹窗尖角箭头 */
+/* 弹窗小三角箭头 */
 .rss-popup::after {
   content: "";
   position: absolute;
@@ -499,7 +523,7 @@ p.desc{
             </a>
         </div>
 
-		<!-- GitHub、B站、邮箱链接【SVG图标已放大至18×18，匹配文字比例】 -->
+		<!-- GitHub、B站、邮箱链接 -->
 		<p class="custom-footer-text footer-links">
 			<a href="https://github.com/oxn/" target="_blank" rel="noopener noreferrer" title="GitHub">
 				<svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
@@ -528,9 +552,9 @@ p.desc{
 		<!-- 网站运行时长 -->
 		<p id="site-time">本站已苦苦支撑很久了！</p>
 
-		<!-- CDN与服务商链接行 -->
+		<!-- CDN与服务商链接行（已修复移动端串行问题） -->
 		<p class="custom-footer-text footer-links">
-			<span>Protected by</span>
+			<span>Protected by </span>
 			<a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" title="Cloudflare">
 				<svg width="16" height="8" viewBox="0 0 40 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path fill="#F6821F" d="m27.16 18.507.204-.735c.242-.873.152-1.68-.255-2.274-.374-.547-.998-.868-1.755-.906l-14.346-.19a.3.3 0 0 1-.127-.034.3.3 0 0 1-.099-.09.31.31 0 0 1-.03-.27.4.4 0 0 1 .128-.185.37.37 0 0 1 .205-.081l14.479-.192c1.717-.082 3.576-1.536 4.227-3.31l.826-2.25a.55.55 0 0 0 .022-.298C29.702 3.29 25.94 0 21.44 0c-4.146 0-7.667 2.792-8.928 6.673a4.1 4.1 0 0 0-2.978-.86c-1.99.206-3.589 1.877-3.786 3.953a4.6 4.6 0 0 0 .11 1.547C2.605 11.41 0 14.189 0 17.603q0 .459.065.911c.009.07.042.134.093.18.05.047.116.072.183.073l26.485.003h.007a.34.34 0 0 0 .205-.076.36.36 0 0 0 .122-.187"></path>
@@ -538,14 +562,14 @@ p.desc{
 				</svg>
 			</a>
 			<span class="sep">|</span>
-			<span>Storage by</span>
+			<span>Storage by </span>
 			<a href="https://www.backblaze.com/" target="_blank" rel="noopener noreferrer" title="Backblaze">
 				<svg width="12" height="12" viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 					<path d="M24.664 0c3.5 3.1 6.6 6.998 7.776 11.663.4 1.944.4 3.5-.4 5.443-.4 1.555-1.166 3.1-1.944 5.054-.778 2.333-.778 5.054.4 7.776C31.663 32.27 32.05 35 32.05 38.1c-.4 3.1-2.333 5.054-5.443 5.054-1.944 0-3.888-.4-5.832-1.166-3.888-1.944-5.832-4.665-6.22-8.942-.4-5.832 1.944-10.497 6.22-13.996 1.555-1.555 3.1-3.1 4.277-5.054 2.333-4.277 1.944-8.553.4-12.83-.4-.4-.4-.778-.778-1.166zm15.94 13.22l-1.166 4.277a14.68 14.68 0 0 0 0 5.832c.4 2.333 1.166 4.277 3.1 6.22 1.555 1.166 3.1 2.72 4.665 3.888 4.665 4.277 5.054 9.33 3.5 14.774-1.166 3.888-4.277 5.443-8.164 6.6-3.888.778-7.387-1.166-8.942-4.665-1.166-2.333-1.166-4.665.4-6.6 1.944-3.1 2.333-6.6 1.166-10.108l-1.166-4.665c-1.166-2.72-.778-5.443.4-7.776 1.555-3.1 3.888-5.443 6.22-7.776zm6.6 43.93c-.4.4-.4.778-.778 1.166-2.72 3.1-5.832 4.665-10.108 5.443-5.054.778-10.108-.4-14.385-2.72-3.888-1.944-6.6-5.443-8.164-9.72-1.166-2.72-1.555-5.832-1.166-8.942 0-.4 0-.778.4-.778 0 0 .4 0 .4.4 2.72 3.1 6.22 4.665 10.108 5.054 1.166-.4 2.333-.4 3.5-.4.778 0 1.166.4 1.166 1.166.4.778.4 1.555.778 2.333 1.555 4.277 4.665 6.6 9.33 7.776 2.333.4 4.665.4 6.998-.778h1.944c0-.4 0 0 0 0z"></path>
 				</svg>
 			</a>
 			<span class="sep">|</span>
-			<span>Analytics by</span>
+			<span>Analytics by </span>
 			<a href="https://umami.is/" target="_blank" rel="noopener noreferrer" title="Umami Analytics">
 				<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 					<path d="M2.203 8.611H.857a.845.845 0 0 0-.841.841v.858a13.31 13.31 0 0 0-.016.6c0 6.627 5.373 12 12 12 6.527 0 11.837-5.212 11.996-11.701 0-.025.004-.05.004-.075V9.452a.845.845 0 0 0-.841-.841h-1.346c-1.159-4.329-5.112-7.521-9.805-7.521-4.692 0-8.645 3.192-9.805 7.521Zm18.444 0H3.37c1.127-3.702 4.57-6.399 8.638-6.399 4.069 0 7.512 2.697 8.639 6.399Z"></path>
