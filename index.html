@@ -92,7 +92,7 @@
           </svg>
         </a>
         <span class="sep">|</span>
-        <a href="https://space.bilibili.com/3707012544202886" target="_blank" rel="noopener noreferrer"
+        <a href="https://space.bilibili.com/675877055" target="_blank" rel="noopener noreferrer"
           title="Bilibili">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -159,6 +159,8 @@
       </div>
     </div>
   </div>
+
   <script>function randomBgGradient() { const t = "dark" === document.documentElement.getAttribute("data-theme"), e = (5 + 90 * Math.random()).toFixed(2), a = (5 + 90 * Math.random()).toFixed(2), o = (200 + 80 * Math.random()).toFixed(2), n = (100 + 30 * Math.random()).toFixed(2); let d; d = t ? `radial-gradient(ellipse ${o}% ${n}% at ${e}% ${a}%, #111827 0%, #0f1318 45%, #0a0e12 100%)` : `radial-gradient(ellipse ${o}% ${n}% at ${e}% ${a}%, #e9e9cc 0%, #b8e4ee 45%, #e6f2fb 100%)`, document.documentElement.style.setProperty("--bg-gradient-base", d) } const startDate = new Date("2011-11-19"); function updateSiteTime() { const t = (new Date).getTime() - startDate.getTime(), e = 6e4, a = 36e5, o = 864e5, n = 365 * o, d = Math.floor(t / n); let i = t % n; const r = Math.floor(i / o); i %= o; const m = Math.floor(i / a); i %= a; const l = Math.floor(i / e); i %= e; const c = Math.floor(i / 1e3); document.getElementById("site-time").textContent = "本站已苦苦支撑 " + d + " 年 " + r + " 天 " + m + " 小时 " + l + " 分 " + c + " 秒" } updateSiteTime(), setInterval(updateSiteTime, 1e3), randomBgGradient(); function toggleMode() { const e = document.documentElement, t = document.querySelector(".mode-toggle"), o = "dark" === e.getAttribute("data-theme") ? "light" : "dark"; e.setAttribute("data-theme", o), t.textContent = "dark" === o ? "🌙" : "☀️", localStorage.setItem("theme", o), randomBgGradient() } window.onload = () => { const e = document.documentElement.getAttribute("data-theme"); document.querySelector(".mode-toggle").textContent = "dark" === e ? "🌙" : "☀️" }, window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => { if (!localStorage.getItem("theme")) { const t = document.documentElement, o = e.matches ? "dark" : "light"; t.setAttribute("data-theme", o), document.querySelector(".mode-toggle").textContent = "dark" === o ? "🌙" : "☀️", randomBgGradient() } }); const rssTrigger = document.getElementById("rssTrigger"), rssPopup = document.getElementById("rssPopup"); let showFlag = !1; function setPopupPos() { const o = rssTrigger.getBoundingClientRect(), s = rssPopup.offsetWidth, e = o.left + o.width / 2 - s / 2, t = o.top - rssPopup.offsetHeight - 8, p = window.innerWidth - s - 8, n = Math.max(8, Math.min(e, p)); rssPopup.style.left = n + "px", rssPopup.style.top = t + "px" } function openPopup() { setPopupPos(), showFlag = !0, rssPopup.classList.add("show") } function closePopup() { showFlag = !1, rssPopup.classList.remove("show") } rssTrigger.onclick = function (o) { o.stopPropagation(), showFlag ? closePopup() : openPopup() }, document.onclick = closePopup, rssPopup.onclick = function (o) { o.stopPropagation() }, document.addEventListener("keydown", function (o) { "Escape" === o.key && closePopup() }), window.addEventListener("resize", function () { showFlag && setPopupPos() }), window.addEventListener("scroll", function () { showFlag && setPopupPos() })</script>
 </body>
+
 </html>
